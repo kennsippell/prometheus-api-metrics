@@ -692,6 +692,22 @@ describe('when using express framework', () => {
                     });
             });
         });
+        describe('when using wildcard with repeating strings', function() {
+            before(() => {
+                return supertest(app)
+                    .get('/wildcard/wild')
+                    .expect(200)
+                    .then((res) => {});
+            });
+            it('with no repeating strings', () => {
+                return supertest(app)
+                    .get('/metrics')
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.text).to.contain('method="GET",route="/wildcard/*",code="200"');
+                    });
+            });
+        });
         it('should get metrics as json', () => {
             return supertest(app)
                 .get('/metrics.json')

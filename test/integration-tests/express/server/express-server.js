@@ -53,6 +53,10 @@ app.get('/checkout', (req, res, next) => {
     next();
 });
 
+app.get('/wildcard/*', (req, res, next) => {
+    res.json({ status: 'ok' });
+})
+
 app.post('/test', (req, res, next) => {
     setTimeout(() => {
         res.status(201);
