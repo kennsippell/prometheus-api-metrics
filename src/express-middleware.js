@@ -77,13 +77,13 @@ class ExpressMiddleware {
                 route = `${route}?${Object.keys(req.query).sort().map((queryParam) => `${queryParam}=<?>`).join('&')}`;
             }
         }
-        
+
         // this condition will evaluate to true only in
         // express framework and no route was found for the request. if we log this metrics
         // we'll risk in a memory leak since the route is not a pattern but a hardcoded string.
         if (!route || route === '') {
             // if (!req.route && res && res.statusCode === 404) {
-            route = 'N/A';
+            route = 'Static Content';
         }
 
         return route;
