@@ -91,7 +91,7 @@ describe('when using express framework (default route)', function() {
         describe('when calling a GET endpoint with * in route and route param', () => {
             before(() => {
                 return supertest(app)
-                    .get('/hellllllo/val')
+                    .get('/hellllllo/variable')
                     .expect(200)
                     .then((res) => {});
             });
