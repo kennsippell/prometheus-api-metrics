@@ -54,6 +54,40 @@ describe('when using express framework (default route)', function() {
             });
         });
 
+        describe('when calling a GET endpoint with route param', () => {
+            before(() => {
+                return supertest(app)
+                    .get('/hello/test')
+                    .expect(200)
+                    .then((res) => {});
+            });
+            it('should add it to the histogram', () => {
+                return supertest(app)
+                    .get('/metrics')
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.text).to.contain('method="GET",route="/hello/:val",code="200"');
+                    });
+            });
+        });
+
+        describe('when calling a GET endpoint with * in route', () => {
+            before(() => {
+                return supertest(app)
+                    .get('/hellllllo')
+                    .expect(200)
+                    .then((res) => {});
+            });
+            it('should add it to the histogram', () => {
+                return supertest(app)
+                    .get('/metrics')
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.text).to.contain('method="GET",route="/he*o",code="200"');
+                    });
+            });
+        });
+
         describe('when calling a GET endpoint with one query param', () => {
             before(() => {
                 return supertest(app)
