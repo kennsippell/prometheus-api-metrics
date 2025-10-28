@@ -10,11 +10,15 @@ app.get('/hello', (req, res) => {
     res.json({ message: 'Hello World!' });
 });
 
+app.get('/hello/:val', (req, res) => {
+    res.json({ message: 'Hello World!' });
+});
+
 app.get('/he*o', (req, res) => {
     res.json({ message: 'Hello World!' });
 });
 
-app.get('/hello/:val', (req, res) => {
+app.get('/he*o/:val', (req, res) => {
     res.json({ message: 'Hello World!' });
 });
 

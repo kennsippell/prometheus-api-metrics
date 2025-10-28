@@ -88,6 +88,23 @@ describe('when using express framework (default route)', function() {
             });
         });
 
+        describe('when calling a GET endpoint with * in route and route param', () => {
+            before(() => {
+                return supertest(app)
+                    .get('/hellllllo/val')
+                    .expect(200)
+                    .then((res) => {});
+            });
+            it('should add it to the histogram', () => {
+                return supertest(app)
+                    .get('/metrics')
+                    .expect(200)
+                    .then((res) => {
+                        expect(res.text).to.contain('method="GET",route="/he*o/:val",code="200"');
+                    });
+            });
+        });
+
         describe('when calling a GET endpoint with one query param', () => {
             before(() => {
                 return supertest(app)
